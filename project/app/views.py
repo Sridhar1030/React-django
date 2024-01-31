@@ -5,6 +5,14 @@ from rest_framework.response import Response
 from . serializer import *
 # Create your views here.
 
+class UpdateEmployeeView(APIView):
+    serializer_class = ReactSerializer
+
+    def post(self, request):
+        serializer = ReactSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
 
 class ReactView(APIView):
 
